@@ -1,0 +1,315 @@
+        /* ====== ESTILOS GENERALES ====== */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-light: #ecf0f1;
+            --text-dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ====== ENCABEZADO ====== */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #bdc3c7;
+        }
+
+        /* ====== BARRA DE NAVEGACIÓN ====== */
+        nav {
+            background-color: #1a252f;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.2rem;
+            transition: background 0.3s;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        nav ul li a:hover, nav ul li a.active-nav {
+            background-color: var(--secondary-color);
+        }
+
+        /* ====== CUERPO / PÁGINAS ====== */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            min-height: 60vh; 
+        }
+
+        .page-section {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-section h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .page-section h3 {
+            color: var(--secondary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Imagen responsiva */
+        .img-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Video responsivo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Formulario de simulación */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* ====== MAPA DEL SITIO (Tarjetas) ====== */
+        .mapa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .mapa-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .mapa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            border-color: var(--secondary-color);
+        }
+
+        .mapa-card .icono {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .mapa-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .mapa-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .mapa-card .btn-card {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .mapa-card .btn-card:hover {
+            background-color: #2980b9;
+        }
+
+        /* ====== FLECHITAS DE NAVEGACIÓN ====== */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #ccc;
+        }
+
+        .nav-arrow {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-arrow:hover {
+            background-color: #2980b9;
+        }
+
+        .nav-arrow:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* ====== PIE DE PÁGINA ====== */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links {
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* ====== RESPONSIVO ====== */
+        @media (max-width: 768px) {
+            header { padding: 1.5rem 1rem; }
+            header h1 { font-size: 1.3rem; }
+            header p { font-size: 1rem; }
+            
+            nav ul { 
+                display: grid; 
+                grid-template-columns: 1fr 1fr; /* Esto hace que el menú sea una cuadrícula 2x2 */
+                text-align: center;
+            }
+            nav ul li a { 
+                border-bottom: 1px solid #34495e; 
+                padding: 0.8rem 0.5rem; 
+                font-size: 0.85rem;
+            }
+            
+            .page-section { padding: 1.2rem; }
+            .page-navigation { flex-direction: column; gap: 10px; }
+            .nav-arrow { width: 100%; justify-content: center; }
+            .mapa-grid { grid-template-columns: 1fr; }
+            
+            /* Ajustes para la imagen y el video */
+            .img-container img { width: 100%; }
+            .video-container { margin: 1rem 0; }
+        }

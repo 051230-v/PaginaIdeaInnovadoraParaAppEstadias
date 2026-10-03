@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generación de Excel - Relación de Profesores y Alumnos</title>
+    <!-- Enlace a la hoja de estilos -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Enlace al Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- ENCABEZADO -->
+    <header>
+        <h1>Idea creativa: Generación de Excel de la relación de profesores y alumnos</h1>
+        <p>Eslogan: "Optimizando la gestión académica y de estadías con un solo clic"</p>
+    </header>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav>
+        <ul>
+            <li><a onclick="showPage('inicio')" id="nav-inicio" class="active-nav">Inicio</a></li>
+            <li><a onclick="showPage('proyecto')" id="nav-proyecto">El Proyecto</a></li>
+            <li><a onclick="showPage('mapa')" id="nav-mapa">Mapa del Sitio</a></li>
+            <li><a onclick="showPage('demo')" id="nav-demo">Demostración</a></li>
+            <li><a onclick="showPage('contacto')" id="nav-contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- CUERPO DE LA PÁGINA (MAIN, SECTIONS, FOOTER)-->
+    <main>
+        <!-- PÁGINA 1: INICIO -->
+        <section id="inicio" class="page-section active">
+            <h2>Bienvenido a mi Idea Creativa</h2>
+            <p>Hola, soy <strong>Ana Belén</strong> y te doy la bienvenida a la presentación de mi proyecto innovador para el manejo de estadías y tesis universitarias.</p>
+            <p>Este sistema está diseñado para transformar la manera en que las coordinaciones académicas gestionan la asignación de asesores, eliminando el uso de hojas de cálculo manuales y reduciendo los errores humanos.</p>
+            
+            <h3>¿Qué encontrarás en este sitio?</h3>
+            <p>Te invito a explorar las diferentes secciones donde explico a detalle cómo funciona mi idea, los beneficios que trae y una demostración práctica de la generación del archivo Excel.</p>
+            <p>Puedes navegar usando el menú superior, el <strong>Mapa del Sitio</strong>, o las flechitas de navegación al final de cada página.</p>
+            
+            <div class="img-container">
+                <img src="img/image.png" alt="Captura de pantalla del proyecto">
+                <p><small>Figura: Optimización de procesos académicos.</small></p>
+            </div>
+
+            <div class="page-navigation">
+                <button class="nav-arrow" disabled>⬅ Anterior</button>
+                <button class="nav-arrow" onclick="showPage('proyecto')">Siguiente ➡</button>
+            </div>
+        </section>
+
+        <!-- PÁGINA 2: EL PROYECTO -->
+        <section id="proyecto" class="page-section">
+            <h2>Sobre el Proyecto</h2>
+            
+            <h3>Problemática</h3>
+            <p>Actualmente, en muchas instituciones educativas, la asignación de profesores asesores para estadías y tesis se realiza mediante métodos manuales. Esto provoca pérdida de tiempo, duplicidad de datos y una gran dificultad para dar seguimiento a la relación entre alumnos y docentes.</p>
+            
+            <h3>Nuestra Solución</h3>
+            <p>Mi idea innovadora consiste en un sistema web que permite <strong>llenar un formulario digital</strong> con los datos del alumno y su profesor asesor. Al finalizar, el sistema procesa la información y <strong>genera automáticamente un archivo en formato Excel</strong> con toda la relación de profesores y alumnos, listo para ser descargado y utilizado por la coordinación académica.</p>
+            
+            <h3>Beneficios Clave</h3>
+            <ul>
+                <li>✅ <strong>Ahorro de tiempo:</strong> Generación instantánea del documento.</li>
+                <li>✅ <strong>Reducción de errores:</strong> Validación de datos en el formulario.</li>
+                <li>✅ <strong>Centralización:</strong> Toda la información en un solo archivo Excel.</li>
+                <li>✅ <strong>Facilidad de uso:</strong> Interfaz intuitiva para coordinadores y alumnos.</li>
+            </ul>
+
+            <div class="page-navigation">
+                <button class="nav-arrow" onclick="showPage('inicio')">⬅ Anterior</button>
+                <button class="nav-arrow" onclick="showPage('mapa')">Siguiente ➡</button>
+            </div>
+        </section>
+
+        <!-- PÁGINA 3: MAPA DEL SITIO -->
+        <section id="mapa" class="page-section">
+            <h2>Mapa del Sitio</h2>
+            <p>Explora todas las secciones de este sitio web. Haz clic en cualquiera de las tarjetas para ir directamente a esa página.</p>
+            
+            <div class="mapa-grid">
+                <!-- Tarjeta Inicio -->
+                <div class="mapa-card" onclick="showPage('inicio')">
+                    <span class="icono">🏠</span>
+                    <h4>Inicio</h4>
+                    <p>Bienvenida y presentación general del proyecto.</p>
+                    <button class="btn-card">Ir a Inicio</button>
+                </div>
+                <!-- Tarjeta El Proyecto -->
+                <div class="mapa-card" onclick="showPage('proyecto')">
+                    <span class="icono">📋</span>
+                    <h4>El Proyecto</h4>
+                    <p>Problemática, solución y beneficios de la idea.</p>
+                    <button class="btn-card">Ir a El Proyecto</button>
+                </div>
+                <!-- Tarjeta Demostración -->
+                <div class="mapa-card" onclick="showPage('demo')">
+                    <span class="icono">⚙️</span>
+                    <h4>Demostración</h4>
+                    <p>Video explicativo y simulador de generación de Excel.</p>
+                    <button class="btn-card">Ir a Demostración</button>
+                </div>
+                <!-- Tarjeta Contacto -->
+                <div class="mapa-card" onclick="showPage('contacto')">
+                    <span class="icono">📧</span>
+                    <h4>Contacto</h4>
+                    <p>Información de contacto para dudas o sugerencias.</p>
+                    <button class="btn-card">Ir a Contacto</button>
+                </div>
+            </div>
+
+            <div class="page-navigation">
+                <button class="nav-arrow" onclick="showPage('proyecto')">⬅ Anterior</button>
+                <button class="nav-arrow" onclick="showPage('demo')">Siguiente ➡</button>
+            </div>
+        </section>
+
+        <!-- PÁGINA 4: DEMOSTRACIÓN -->
+        <section id="demo" class="page-section">
+            <h2>¿Cómo Funciona? (Demostración)</h2>
+            <p>El flujo es muy sencillo: el coordinador o el alumno llena el formulario, y el sistema procesa la información para generar el documento Excel. Mira el siguiente video explicativo:</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video explicativo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <h3>Simulador del Formulario</h3>
+            <p>Formulario que simula mi idea, al dar clic en "Generar Excel", se descargará un archivo CSV que se abre perfectamente en Excel.</p>
+            
+            <form id="formularioExcel">
+                <div class="form-group">
+                    <label for="alumno">Nombre del Alumno:</label>
+                    <input type="text" id="alumno" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="profesor">Nombre del Profesor Asesor:</label>
+                    <input type="text" id="profesor" required placeholder="Ej. Dra. Ana Gómez">
+                </div>
+                <div class="form-group">
+                    <label for="tema">Tema de Tesis / Estadía:</label>
+                    <input type="text" id="tema" required placeholder="Ej. Sistema de Gestión Web">
+                </div>
+                <button type="submit" class="btn">📥 Generar Excel</button>
+            </form>
+
+            <div class="page-navigation">
+                <button class="nav-arrow" onclick="showPage('mapa')">⬅ Anterior</button>
+                <button class="nav-arrow" onclick="showPage('contacto')">Siguiente ➡</button>
+            </div>
+        </section>
+
+        <!-- PÁGINA 5: CONTACTO -->
+        <section id="contacto" class="page-section">
+            <h2>Contacto</h2>
+            <p>Si deseas saber más sobre este proyecto o implementarlo en tu institución, no dudes en contactarme.</p>
+            <p><strong>Correo:</strong> 232384742o@utp.edu.mx</p>
+            <p>Agradezco mucho tu interés en esta idea creativa. ¡Estoy segura de que puede marcar una gran diferencia en la gestión académica!</p>
+
+            <div class="page-navigation">
+                <button class="nav-arrow" onclick="showPage('demo')">⬅ Anterior</button>
+                <button class="nav-arrow" disabled>Siguiente ➡</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank">📘 Facebook</a>
+            <a href="https://twitter.com" target="_blank">🐦 Twitter</a>
+            <a href="https://linkedin.com" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com" target="_blank">💻 GitHub</a>
+        </div>
+        <p>&copy; 2026 Ana Belén. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Enlace al archivo JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
