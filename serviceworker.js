@@ -35,7 +35,7 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Evento Fetch
+// Evento Fetch: Intercepta las peticiones de red
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request).then((response) => {

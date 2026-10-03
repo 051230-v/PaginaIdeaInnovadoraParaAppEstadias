@@ -4,6 +4,7 @@
   "description": "Aplicación web para la idea innovadora de estadías.",
   "start_url": "./index.html",
   "scope": "./",
+  "prefer_related_applications": false,
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
