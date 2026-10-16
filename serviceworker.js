@@ -1,8 +1,10 @@
-// serviceworker.js
 const CACHE_NAME = 'app-estadias-v1';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
+    './styles.css',
+    './app.js',
+    './manifest.json',
     './img/icon-192.png',
     './img/icon-512x512.png'
 ];
