@@ -7,7 +7,12 @@
     "start": "node server.js",
     "dev": "node --watch server.js"
   },
-  "keywords": ["pwa", "estadias", "mysql", "express"],
+  "keywords": [
+    "pwa",
+    "estadias",
+    "mysql",
+    "express"
+  ],
   "author": "Ana Belen",
   "license": "ISC",
   "dependencies": {
@@ -15,6 +20,6 @@
     "dotenv": "^16.4.5",
     "express": "^5.2.1",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.11.0"
+    "mysql2": "^3.24.6"
   }
 }
