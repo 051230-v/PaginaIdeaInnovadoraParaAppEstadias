@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Enlace al Manifest -->
     <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/sigep.css">
 </head>
 <body>
     <!-- ENCABEZADO -->
@@ -39,7 +40,7 @@
             <p>Puedes navegar usando el menú superior, el <strong>Mapa del Sitio</strong>, o las flechitas de navegación al final de cada página.</p>
             
             <div class="img-container">
-                <img src="img/image.png" alt="Captura de pantalla del proyecto">
+                <img src="img/modulo-1.jpg" alt="Captura de pantalla del proyecto">
                 <p><small>Figura: Optimización de procesos académicos.</small></p>
             </div>
 
@@ -111,99 +112,27 @@
             </div>
         </section>
 
+
         <!-- PÁGINA 4: DEMOSTRACIÓN - MÓDULO 1 -->
         <section id="demo" class="page-section">
-            <!-- Video de demostración del caché (CORREGIDO) -->
-            <p>Video demostrativo para el caché:</p>
-            <div class="video-container">
-                <!-- ✅ Enlace corregido: formato embed -->
-                <iframe src="https://www.youtube.com/embed/t5VJXQ9dAI" title="Video explicativo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                 
-            </div>
             <h2>Módulo 1: Expediente Digital y Gestión de Documentos</h2>
-            <p>Sube, consulta y gestiona tus documentos de estadía. El sistema te mostrará el avance de tu expediente en tiempo real.</p>
 
-            <div class="modulo-container">
-                <!-- BARRA LATERAL -->
-                <aside class="modulo-sidebar">
-                    <div class="sidebar-icon active" title="Documentos">
-                        <span>📄</span>
-                        <span class="sidebar-label">Documentos</span>
-                    </div>
-                    <div class="sidebar-icon" title="Perfil">
-                        <span>👤</span>
-                        <span class="sidebar-label">Perfil</span>
-                    </div>
-                    <div class="sidebar-icon" title="Empresa">
-                        <span>🏢</span>
-                        <span class="sidebar-label">Empresa</span>
-                    </div>
-                    <div class="sidebar-icon" title="Avisos">
-                        <span>🔔</span>
-                        <span class="sidebar-label">Avisos</span>
-                    </div>
-                </aside>
-
-                <!-- CONTENIDO PRINCIPAL -->
-                <div class="modulo-contenido">
-                    <div class="modulo-header">
-                        <h3>Mis documentos</h3>
-                        <button class="btn-subir" onclick="abrirModalSubir()">+ Subir documento</button>
-                    </div>
-
-                    <!-- Barra de progreso -->
-                    <div class="progreso-container">
-                        <div class="progreso-info">
-                            <span>📊 Avance del expediente</span>
-                            <span id="porcentaje-avance" class="porcentaje">0%</span>
-                        </div>
-                        <div class="progreso-barra">
-                            <div class="progreso-fill" id="progreso-fill" style="width: 0%"></div>
-                        </div>
-                        <p class="progreso-detalle" id="progreso-detalle">Cargando...</p>
-                    </div>
-
-                    <!-- Filtros -->
-                    <div class="filtros">
-                        <button class="filtro-btn active" data-filtro="todos">Todos</button>
-                        <button class="filtro-btn" data-filtro="Pendiente">Pendientes</button>
-                        <button class="filtro-btn" data-filtro="En revisión">En revisión</button>
-                        <button class="filtro-btn" data-filtro="Aprobado">Aprobados</button>
-                    </div>
-
-                    <!-- Lista de documentos -->
-                    <div class="documentos-lista" id="documentos-lista">
-                        <div class="loading">⏳ Cargando documentos...</div>
-                    </div>
-                </div>
+            <!-- Video demostrativo para el caché -->
+            <p>Video demostrativo para el caché:</p>
+            <div class="video-container" style="margin-bottom: 20px;">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video explicativo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
-            <!-- MODAL PARA SUBIR PDF -->
-            <div class="modal-overlay" id="modal-subir">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>📤 Subir documento</h3>
-                        <button class="modal-cerrar" onclick="cerrarModalSubir()">✕</button>
-                    </div>
-                    <form id="form-subir-documento">
-                        <div class="form-group">
-                            <label for="tipo-documento">Tipo de documento:</label>
-                            <select id="tipo-documento" required>
-                                <option value="">Selecciona uno...</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="archivo-pdf">Archivo PDF (máx. 5 MB):</label>
-                            <input type="file" id="archivo-pdf" accept="application/pdf" required>
-                        </div>
-                        <div class="modal-botones">
-                            <button type="button" class="btn-cancelar" onclick="cerrarModalSubir()">Cancelar</button>
-                            <button type="submit" class="btn-subir-modal">Subir documento</button>
-                        </div>
-                    </form>
-                </div>
+            <p>Haz clic en el siguiente botón para acceder al portal del Sistema de Gestión de Estadías (SIGEP UTP).</p>
+            
+            <!-- Botón para abrir el portal en una nueva pestaña (o en la misma) -->
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="portal.html" class="btn" style="font-size: 1.2rem; padding: 15px 30px; background: #db2777; color: white; text-decoration: none; border-radius: 8px; display: inline-block;">
+                    Ir al Portal SIGEP UTP 🚀
+                </a>
             </div>
 
-            <div class="page-navigation">
+            <div class="page-navigation" style="margin-top: 50px;">
                 <button class="nav-arrow" onclick="showPage('mapa')">⬅ Anterior</button>
                 <button class="nav-arrow" onclick="showPage('contacto')">Siguiente ➡</button>
             </div>

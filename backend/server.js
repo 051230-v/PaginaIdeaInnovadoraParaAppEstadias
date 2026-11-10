@@ -1,8 +1,5 @@
-// ============================================
 // SERVIDOR BACKEND - MODULO 1
 // Expediente Digital y Gestion de Documentos
-// Autor: Ana Belen
-// ============================================
 
 const express = require('express');
 const cors = require('cors');
@@ -14,6 +11,13 @@ const upload = require('./middleware/upload');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const webpush = require('web-push');
+webpush.setVapidDetails(
+    'mailto:tu-correo@ejemplo.com',
+    process.env.VAPID_PUBLIC_KEY,
+    process.env.VAPID_PRIVATE_KEY
+);
 
 // ============================================
 // MIDDLEWARES GLOBALES
@@ -286,6 +290,8 @@ app.post('/api/documentos', upload.single('archivo'), async (req, res) => {
         }
 
         const archivo_pdf = req.file.filename;
+        let result;
+        let mensajeExito = '';
 
         // Verificamos si ya existe un documento de ese tipo para ese expediente
         const [existente] = await db.query(
@@ -293,7 +299,6 @@ app.post('/api/documentos', upload.single('archivo'), async (req, res) => {
             [expediente_id, tipo_documento_id]
         );
 
-        let result;
         if (existente.length > 0) {
             // Actualizamos: incrementamos version y cambiamos el archivo
             const nuevaVersion = existente[0].version + 1;
@@ -311,30 +316,56 @@ app.post('/api/documentos', upload.single('archivo'), async (req, res) => {
                 [existente[0].id, `Nueva version (v${nuevaVersion}) subida`, req.body.usuario || 'Alumno']
             );
 
-            return res.json({
-                mensaje: 'Documento actualizado con nueva version',
-                id: existente[0].id,
-                version: nuevaVersion
-            });
+            mensajeExito = 'Documento actualizado con nueva version';
+        } else {
+            // Si no existe, creamos uno nuevo
+            const sql = `
+                INSERT INTO documentos (expediente_id, tipo_documento_id, archivo_pdf, estado) 
+                VALUES (?, ?, ?, 'En revision')
+            `;
+            [result] = await db.query(sql, [expediente_id, tipo_documento_id, archivo_pdf]);
+
+            // Registramos en el historial
+            await db.query(
+                `INSERT INTO historial_documentos (documento_id, accion, usuario) 
+                 VALUES (?, ?, ?)`,
+                [result.insertId, 'Documento subido por primera vez', req.body.usuario || 'Alumno']
+            );
+
+            mensajeExito = 'Documento subido exitosamente';
         }
 
-        // Si no existe, creamos uno nuevo
-        const sql = `
-            INSERT INTO documentos (expediente_id, tipo_documento_id, archivo_pdf, estado) 
-            VALUES (?, ?, ?, 'En revision')
-        `;
-        [result] = await db.query(sql, [expediente_id, tipo_documento_id, archivo_pdf]);
+        // ==========================================
+        // LÓGICA DE NOTIFICACIÓN PUSH (AQUÍ VA)
+        // ==========================================
+        try {
+            const [subs] = await db.query('SELECT * FROM suscripciones');
+            const payload = JSON.stringify({
+                title: '¡Documento Subido!',
+                body: `Tu archivo está en revisión.`
+            });
+            
+            subs.forEach(sub => {
+                const pushSubscription = {
+                    endpoint: sub.endpoint,
+                    keys: { p256dh: sub.p256dh, auth: sub.auth }
+                };
+                // Enviamos la notificación
+                webpush.sendNotification(pushSubscription, payload).catch(err => {
+                    if (err.statusCode === 410 || err.statusCode === 404) { 
+                        db.query('DELETE FROM suscripciones WHERE endpoint = ?', [sub.endpoint]);
+                    }
+                });
+            });
+        } catch (e) { 
+            console.log('Error enviando push:', e); 
+        }
+        // ==========================================
 
-        // Registramos en el historial
-        await db.query(
-            `INSERT INTO historial_documentos (documento_id, accion, usuario) 
-             VALUES (?, ?, ?)`,
-            [result.insertId, 'Documento subido por primera vez', req.body.usuario || 'Alumno']
-        );
-
+        // Finalmente, respondemos al cliente
         res.status(201).json({
-            mensaje: 'Documento subido exitosamente',
-            id: result.insertId
+            mensaje: mensajeExito,
+            id: existente.length > 0 ? existente[0].id : result.insertId
         });
 
     } catch (error) {
@@ -458,6 +489,21 @@ app.get('/api/revisiones/:documento_id', async (req, res) => {
     }
 });
 
+// GET /api/historial - Obtiene el historial de cambios
+app.get('/api/historial', async (req, res) => {
+    try {
+        const sql = `
+            SELECT h.*, d.archivo_pdf 
+            FROM historial_documentos h
+            INNER JOIN documentos d ON h.documento_id = d.id
+            ORDER BY h.fecha DESC
+        `;
+        const [rows] = await db.query(sql);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 // ============================================
 // MANEJO DE ERRORES GLOBALES
 // ============================================
@@ -470,6 +516,17 @@ app.use((err, req, res, next) => {
         return res.status(400).json({ error: err.message });
     }
     res.status(500).json({ error: 'Error interno del servidor' });
+});
+
+app.post('/api/suscribir', async (req, res) => {
+    const sub = req.body;
+    const sql = `INSERT IGNORE INTO suscripciones (endpoint, p256dh, auth) VALUES (?, ?, ?)`;
+    try {
+        await db.query(sql, [sub.endpoint, sub.keys.p256dh, sub.keys.auth]);
+        res.status(201).json({ mensaje: 'Suscripción guardada' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 // ============================================

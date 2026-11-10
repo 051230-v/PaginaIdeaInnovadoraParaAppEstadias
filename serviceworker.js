@@ -45,3 +45,38 @@ self.addEventListener('fetch', (event) => {
         })
     );
 });
+
+// Escuchar notificaciones Push
+self.addEventListener('push', function(e) {
+    if (!(self.Notification && self.Notification.permission === 'granted')) {
+        return;
+    }
+    
+    const data = e.data ? e.data.json() : { title: 'Notificación', body: 'Nuevo mensaje' };
+    
+    const options = {
+        body: data.body,
+        icon: './img/icon-192.png', // Usa tu icono
+        badge: './img/icon-192.png'
+    };
+    
+    e.waitUntil(self.registration.showNotification(data.title, options));
+});
+
+// Al dar clic en la notificación, abrir la app
+self.addEventListener('notificationclick', function(e) {
+    e.notification.close();
+    e.waitUntil(
+        clients.matchAll({ type: 'window' }).then(windowClients => {
+            for (var i = 0; i < windowClients.length; i++) {
+                var client = windowClients[i];
+                if (client.url.includes('modulo-1.html') && 'focus' in client) {
+                    return client.focus();
+                }
+            }
+            if (clients.openWindow) {
+                return clients.openWindow('./modulo-1.html');
+            }
+        })
+    );
+});
