@@ -19,10 +19,10 @@ webpush.setVapidDetails(
     process.env.VAPID_PRIVATE_KEY
 );
 
-// ============================================
 // MIDDLEWARES GLOBALES
-// ============================================
-app.use(cors());
+app.use(cors({
+    origin: 'https://051230-v.github.io'
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,9 +35,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// ============================================
 // RUTA DE PRUEBA
-// ============================================
 app.get('/', (req, res) => {
     res.json({
         mensaje: 'API del Modulo 1 - Sistema de Gestion de Estadias',
