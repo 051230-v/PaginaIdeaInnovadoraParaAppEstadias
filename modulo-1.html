@@ -416,30 +416,42 @@
     }
 
     async function activarNotificaciones() {
+        console.log("Clic en activar notificaciones"); // Para que veas en F12 que sí funciona
+
         if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
             return alert('Tu navegador no soporta notificaciones push.');
         }
         try {
             const permission = await Notification.requestPermission();
-            if (permission !== 'granted') return alert('Permiso de notificaciones denegado.');
+            
+            if (permission !== 'granted') {
+                return alert('Permiso de notificaciones denegado. Debes permitirlo en la configuración de tu navegador.');
+            }
 
             const register = await navigator.serviceWorker.ready;
-            const subscription = await register.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: urlBase64ToUint8Array('BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8')
-            });
+            
+            // Verificamos si ya está suscrito para no duplicar
+            let subscription = await register.pushManager.getSubscription();
+            
+            if (!subscription) {
+                subscription = await register.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: urlBase64ToUint8Array('BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8')
+                });
+            }
 
             await fetch(`${API_URL}/suscribir`, {
                 method: 'POST',
                 body: JSON.stringify(subscription),
                 headers: { 'Content-Type': 'application/json' }
             });
-            alert('¡Notificaciones activadas con éxito!');
+            
+            alert('¡Notificaciones activadas con éxito! (Ya puedes recibir avisos)');
         } catch (error) {
             console.error('Error al suscribir:', error);
-            alert('Hubo un error al activar las notificaciones.');
+            alert('Hubo un error al activar las notificaciones. Revisa la consola.');
         }
-    }    
+    }   
     // --- FUNCIÓN PARA EL AVATAR (CERRAR SESIÓN) ---
     function cerrarSesion() {
         const confirmar = confirm("¿Estás seguro que deseas cerrar sesión y volver al portal?");
